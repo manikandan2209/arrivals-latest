@@ -16,6 +16,6 @@ class SingleProduct extends Model
 
     public function includedIn()
     {
-        return $this->belongsToMany('App\SetProduct','set_single');
+        return $this->belongsToMany('App\Models\SetProduct','set_single');
     }
 }

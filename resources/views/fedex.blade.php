@@ -19,7 +19,7 @@
                         <div class="">
                                 <label for="fedex_{{$item->id}}">{{$item->label}} : </label>
                                 <input type="hidden" value="{{$item->id}}" name="fedex[{{$i}}][id]" >
-                                <select name="fedex[{{$i}}][value]" id="fedex_{{$item->id}}" >
+                                <select name="fedex[{{$i}}][value]" id="fedex_{{$item->id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-[200px] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
                                     <option value="fedex" {{$item->value == 'fedex' ? 'selected' : ''}}>Fedex</option>
                                     <option value="ups" {{$item->value == 'ups' ? 'selected' : ''}}>UPS</option>
                                 </select>
@@ -37,14 +37,14 @@
                             @foreach($cutoff as $index => $item)
                                 <div class="mb-4">
                                     <input type="hidden" value="{{$item->id}}" name="fedex[{{$i}}][id]" >
-                                    <x-forms.input label="{{$item->label}}" name="fedex[{{$i}}][value]" type="time" value="{{$item->value}}" />
+                                    <x-forms.timepicker  label="{{$item->label}}" name="fedex[{{$i}}][value]" value="{{$item->value}}" />
                                 </div>
                                 <?php $i++; ?>
                             @endforeach
                             <div class="mt-6 flex items-center gap-4">
                                 <x-button type="primary">{{ __('Update Settings') }}</x-button>
-                                <a class="font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors flex items-center justify-center cursor-pointer focus:ring-blue-500" href="{{route('fedex.cache-clean')}}" >Clear Cache</a>
-                            </div>
+                                <x-button type="secondary" tag="a" href="{{route('fedex.cache-clean')}}" >Clear Cache</x-button>
+                                </div>
                     </div>
                 </div>
             </div>

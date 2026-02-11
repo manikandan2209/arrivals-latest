@@ -5,11 +5,7 @@
         <div class="col-md-10 col-md-offset-1">
            
         <p class="text-right"><a class="btn btn-default text-right" href="{{route('coupon.index',[ 'site' => $site])}}">Back</a></p>
-        @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-        @endif
+     
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

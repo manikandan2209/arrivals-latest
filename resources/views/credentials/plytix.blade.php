@@ -11,33 +11,20 @@
         @if($errors->any())
             {{ implode('', $errors->all('<div>:message</div>')) }}
         @endif
-        <form class="row" action="{{ route('credentials.plytix-update',['credential'=>$credential->id])}}" method="POST">
+        <form class="row" action="{{ route('credentials.plytix-update',['id'=>$credential->id])}}" method="POST">
             {{ csrf_field() }}
             {{ method_field('PATCH ') }}
-            <div class="panel panel-default">
-                <div class="panel-heading"><strong>Plytix Credentials Settings</strong></div>
-                <div class="panel-body">
-                        <input type="hidden" value="set_info" name="used_for" >
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="input-group mb-3 col-md-12">
-                                    <label>Api Key</label>
-                                    <input class="form-control" type="text" value="{{$credential->api_key}}" name="api_key" id="credentials_{{$credential->id}}">
-                                </div>
-                                <div class="input-group mb-3 col-md-12">
-                                    <label>Password</label>
-                                    <input class="form-control" type="text" value="{{$credential->password}}" name="password" id="credentials_{{$credential->id}}">
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="col-md-12">
-                            <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <button class="btn btn-primary" type="submit" >Update Settings</button>
-                            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden mb-6 p-4  ">
+                <div class="panel-heading mb-4 font-bold">Plytix Credentials Settings</div>
+                <div class="">
+                    <div class="mb-4">
+                            <input type="hidden" value="set_info" name="used_for" >
+                            <x-forms.input label="Api Key" name="api_key" type="text" value="{{$credential->api_key}}" />
+                            <x-forms.input label="Password" name="password" type="text" value="{{$credential->password}}"/>
+                        </div>
+                            <x-button type="primary" >Update Settings</x-button>
                         </div>
                     </div>
-                </div>
             </form> 
         </div>
     </div>

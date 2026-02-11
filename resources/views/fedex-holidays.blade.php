@@ -5,43 +5,44 @@
     </div>
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
         <div class="p-6">
-    <table class="w-full text-sm text-left rtl:text-right text-body">
-        <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium">
+    <x-table.table>
+        <x-slot name="tbhead">
+
             <tr>
-                <th scope="col" class="px-6 py-3 font-medium">
+                <th scope="col" class="px-4 py-2">
                     #
                 </th>
-                <th scope="col" class="px-6 py-3 font-medium">
+                <th scope="col" class="px-4 py-2 ">
                     <div class="flex items-center">
                         Name
                     </div>
                 </th>
-                <th scope="col" class="px-6 py-3 font-medium">
+                <th scope="col" class="px-4 py-2 ">
                     <div class="flex items-center">
                         Date
                     </div>
                 </th>
-                <th scope="col" class="px-6 py-3 font-medium">
+                <th scope="col" class="px-4 py-2 ">
                     <div class="flex items-center">
                         Action 
                     </div>
                 </th>
             </tr>
-        </thead>
-        <tbody>
+        </x-slot>
+        <x-slot name="tbbody">
             @foreach($holidays as $index => $holiday)
             <tr class="bg-neutral-primary-soft border-b  border-default">
                 <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                     {{$index+1}}
                 </th>
-                <td class="px-6 py-4">
+                <td class="px-4 py-2">
                     {{$holiday->label}}
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-4 py-2">
                     {{$holiday->value}}
                 </td>
-                <td class="px-6 py-4 text-right">
-                    <a href="{{ route('fedex.delete-holiday', $holiday->id) }}" class="font-medium text-fg-brand hover:underline">Delete</a>
+                <td class="px-4 py-2 text-right">
+                    <x-button tag="a" type="danger" class="max-w-28" icon="fas-trash" href="{{ route('fedex.delete-holiday', $holiday->id) }}" >Delete</x-button>
                 </td>
             </tr>
             @endforeach
@@ -57,13 +58,13 @@
                 <td class="px-6 py-4">
                     <x-forms.input label="Holiday Date" name="value" type="date" value="" />
                 </td>
-                <td class="px-6 py-4 text-right">
-                    <x-button type="primary">Add Holiday</x-button>
+                <td class="px-6 py-4 text-right ">
+                    <x-button class="mt-6" type="primary" icon="fas-plus">Add Holiday</x-button>
                 </td>
                 </form>
             </tr>
-        </tbody>
-    </table>
+        </x-slot>
+    </x-table.table>
         </div>
 </div> 
 </x-layouts.app>

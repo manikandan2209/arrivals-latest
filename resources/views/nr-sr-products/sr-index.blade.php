@@ -1,64 +1,41 @@
 <x-layouts.app :title="__('State Restricted Products List')">
 
 <div class="container">
-    <nav class="navbar navbar-default">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="{{route('nrandsrproducts.sr_index')}}">State Restricted Products</a></li>
-            <li><a href="{{route('nrandsrproducts.nr_index')}}">Non - Returnable Products</a></li>
-            <li><a href="{{route('nrandsrproducts.publish')}}" target="_blank">Publish</a></li>
-            <li class=""><a href="{{route('nrandsrproducts.re_publish')}}" target="_blank">Re-publish</a></li>
-        </ul>
-    </nav>
-    <div class="row">
+        <div class="flex items-center gap-2 mb-4">
+            <x-button type="primary" href="{{route('nrandsrproducts.publish')}}" tag="a" class="ml-2" target="_blank">Publish</x-button>
+            <x-button type="primary" href="{{route('nrandsrproducts.re_publish')}}" tag="a" class="ml-2" target="_blank">Re-publish</x-button>
+        </div>
 
-        <div class="col-md-10 col-md-offset-1">
-            @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-            @endif  
             @if (session('error'))
             <div class="alert alert-error">
                 {{ session('error') }}
             </div>
             @endif    
 
-        <div class="panel panel-default">
-            <div class="panel-heading">Data Import</div>
-            <div class="panel-body">
+        <x-panel paneltitle="Data Import" >
             <form action="{{ route('nrandsrproducts.sr_import') }}" method="POST" enctype="multipart/form-data">
-                {{ csrf_field() }}  
-                <input type="file" name="file" accept=".csv">
-                <br/>
-                <button type="submit" class="btn btn-primary">Import CSV</button>
+                {{ csrf_field() }} 
+                <x-forms.input label=" " name="file" accept=".csv" type="file" class="w-[500px] mb-4"/>
+                <x-button type="primary" class="mb-2" buttontype="submit">Import CSV</x-button>
             </form>
-            </div>
-        </div>
+        </x-panel>
 
-        <div class="panel panel-default">
-                <div class="panel-heading">State Restricted Products List  ( Total : {{$items->total()}} )</div>
-                
+        <x-panel paneltitle="State Restricted Products List  ( Total : {{$items->total()}} )" active>
                 <div class="panel-body">
-                <form action="{{route('nrandsrproducts.sr_index')}}" method="get">
-                    <div class="form-group">    
-                        <label for="inputSearch">Search</label>
-                        <input type="text" value="{{request('query')}}" class="form-control" name="query" />
-                    </div> 
-                    <p class="text-right">   
-                        <a href="{{route('nrandsrproducts.sr_index')}}" class="btn btn-default">Clear</a> 
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </p>
-                </form>
-                    <table class="table">
-                        <thead>
+                    <div class="flex items-center gap-2 mb-4">
+                    <x-forms.search class="w-[500px]" action="{{route('nrandsrproducts.sr_index')}}" name="query" value="{{request('query')}}" placeholder="Search by SKU" />
+                    <x-button type="secondary" tag="a" href="{{route('nrandsrproducts.sr_index')}}" >Clear</x-button>
+                    </div>
+                    <x-table.table>
+                        <x-slot name="tbhead">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">SKU</th>
-                                <th scope="col">State Code</th>
-                                <th scope="col">Published</th>
+                                <th class="px-4 py-2" scope="col">#</th>
+                                <th class="px-4 py-2" scope="col">SKU</th>
+                                <th class="px-4 py-2" scope="col">State Code</th>
+                                <th class="px-4 py-2" scope="col">Published</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                        </x-slot>
+                        <x-slot name="tbbody">
                             @foreach ($items as $index => $item)
                                 <tr>
                                     <td>{{$index + $items->firstItem() }}</td>
@@ -67,12 +44,10 @@
                                     <td>{{ $item->published ? 'Yes' : 'No' }}</td>
                                 </tr>
                             @endforeach
-                        </tbody>
-                    </table>
+                        </x-slot>
+                    </x-table.table>
                     {{ $items->links() }}
                     </div>
-            </div>
-        </div>
-    </div>
+    </x-panel>
 </div>
 </x-layouts.app>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 
 
-class NRAndSRProducts extends Controller
+class NRAndSRProductsController extends Controller
 {
     //
     public function __construct()

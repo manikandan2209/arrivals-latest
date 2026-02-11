@@ -15,6 +15,6 @@ class SetProduct extends Model
 
     public function contains()
     {
-        return $this->belongsToMany('App\SingleProduct' , 'set_single');
+        return $this->belongsToMany('App\Models\SingleProduct' , 'set_single');
     }
 }

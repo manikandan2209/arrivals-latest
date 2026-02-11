@@ -10,7 +10,7 @@ use App\Models\SingleProduct;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class SetProductInfo extends Controller
+class SetProductInfoController extends Controller
 {
     //
     private $plytixCredentials; 

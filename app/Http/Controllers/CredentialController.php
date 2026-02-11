@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Credential;
-use App\PlytixCredential;
+use App\Models\PlytixCredential;
 use Illuminate\Http\Request;
 
 class CredentialController extends Controller

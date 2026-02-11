@@ -18,7 +18,7 @@
                                 <input type="hidden" value="{{$item->id}}" name="bannerSettings[{{$index}}][id]" >
 
                                 <div class="flex items-center gap-2">
-                                    <x-forms.checkbox label="" name="bannerSettings[{{$index}}][status]" value="1" checked="{{ $item->status ? 'checked' : '' }}" />
+                                    <x-forms.switch label="" name="bannerSettings[{{$index}}][status]" value="1" checked="{{ $item->status ? 'checked' : '' }}" />
                                     <x-forms.input label="" name="bannerSettings[{{$index}}][value]" type="text" value="{{ $item->value }}" />
                                 </div>
                         </div>  
